@@ -1,5 +1,5 @@
 
-import { Injectable, NestInterceptor, ExecutionContext, CallHandler, Logger } from '@nestjs/common';
+import { Injectable, NestInterceptor, ExecutionContext, CallHandler, Logger } from '@nestjs/common'; // ExecutionContext info about the current request (HTTP, GraphQL, etc.)
 import { GqlContextType, GqlExecutionContext } from '@nestjs/graphql';
 import { stringify } from 'querystring';
 import { Observable } from 'rxjs';
@@ -27,7 +27,7 @@ export class LoggingInterceptor implements NestInterceptor {
         return next
         .handle()
         .pipe(
-            tap((context) => {
+            tap((context) => { // this context is diffrent from "context: ExecutionContext". it is coming from resolver.
                 const responseTime = Date.now() - recordTime
                 this.logger.log(`${this.stringify(context)} - ${responseTime}ms \n\n`, 'RESPONSE')
             }),
