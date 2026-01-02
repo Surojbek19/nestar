@@ -1,4 +1,4 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from '../auth.service';
 
 @Injectable()
@@ -25,6 +25,8 @@ export class WithoutGuard implements CanActivate {
 			console.log('memberNick[without] =>', request.body.authMember?.memberNick ?? 'none');
 			return true;
 		}
+
+		throw new UnauthorizedException('Unsupported context');
 
 		// description => http, rpc, gprs and etc are ignored
 	}
