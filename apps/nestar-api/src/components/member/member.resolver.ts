@@ -51,9 +51,11 @@ export class MemberResolver {
             @Args('input') input: MemberUpdate,
             @AuthMember("_id") memberId: ObjectId): Promise<Member> {
             console.log("Mutation: updateMember");
-            delete input._id;  //////***********************DELETE givinf error but still working*************************//////
+            // @ts-ignore
+            delete input._id;  
             return await this.memberService.updateMember(memberId, input);
         }
+
         @UseGuards(WithoutGuard)
         @Query(() => Member)
         public async getMember(@Args('memberId') input: string, @AuthMember('_id') memberId: ObjectId): Promise<Member> {
