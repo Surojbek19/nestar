@@ -51,8 +51,7 @@ export class MemberResolver {
             @Args('input') input: MemberUpdate,
             @AuthMember("_id") memberId: ObjectId): Promise<Member> {
             console.log("Mutation: updateMember");
-            // @ts-ignore
-            delete input._id;  
+                delete input._id;  //<======>//
             return await this.memberService.updateMember(memberId, input);
         }
 
