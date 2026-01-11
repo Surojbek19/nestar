@@ -32,7 +32,7 @@ export class PropertyResolver {
     @UseGuards(WithoutGuard)
     @Query((returns) => Property)
     public async getProperty(
-        @Args('PropertyId') input: string,
+        @Args('propertyId') input: string,
         @AuthMember("_id") memberId: ObjectId,
     ): Promise<Property> {
         console.log('Query, getProperty');
