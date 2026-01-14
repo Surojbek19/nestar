@@ -118,7 +118,7 @@ export class BoardArticleService {
     }
 
 
-    public async getAllBoardArticleByAdmin( input: AllBoardArticlesInquiry): Promise<BoardArticles> {
+    public async getAllBoardArticlesByAdmin( input: AllBoardArticlesInquiry): Promise<BoardArticles> {
         const { articleStatus, articleCategory } = input.search;
         const match: T = {  };
         const sort: T = { [input?.sort ?? 'createdAt']: input?.direction ?? Direction.DESC };
@@ -149,7 +149,7 @@ export class BoardArticleService {
     }
 
 
-    public async  updateBoardArticleByAdmine( input: BoardArticleUpdate): Promise<BoardArticle> {
+    public async  updateBoardArticleByAdmin( input: BoardArticleUpdate): Promise<BoardArticle> {
         const { _id, articleStatus } = input;
         const result = await this.boardArticleModel
             .findOneAndUpdate({ _id: _id, articleStatus: BoardArticleStatus.ACTIVE }, 
