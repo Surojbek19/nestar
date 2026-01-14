@@ -80,7 +80,7 @@ export class CommentService {
             return result;
         }
 
-        public async getComments(memberId: ObjectId, input: CommentsInquiry): Promise<Comments> {
+    public async getComments(memberId: ObjectId, input: CommentsInquiry): Promise<Comments> {
             const { commentRefId } = input.search;
             const match: T = { commentRefId: commentRefId, commentStatus: CommentStatus.ACTIVE };
             const sort: T = { [input?.sort ?? 'createdAt']: input?.direction ?? Direction.DESC };
@@ -106,4 +106,12 @@ export class CommentService {
         
                 return result[0]; 
             }
+    
+    public async removeCommentByAdmin(input: ObjectId): Promise<Comment> {
+            const result = await this.commentModel.findOneAndDelete(input).exec();
+            if(!result) throw new InternalServerErrorException(Message.REMOVE_FAILED);
+                
+            return result;
+            }
+
 }
