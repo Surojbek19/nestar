@@ -1,6 +1,7 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
 import type { ObjectId } from "mongoose"; /// Check it later this could cause a error later
 import { MemberAuthType, MemberStatus, MemberType } from "../../enums/member.enum";
+import { MeLiked } from "../like/like";
 
 
 
@@ -82,6 +83,10 @@ export class Member {
 
     @Field(() => String, {nullable: true})
     accessToken?: string;
+
+    /** from aggregation **/
+    @Field(() => [MeLiked], {nullable: true})
+    meLiked?: MeLiked[];
 }
 
 
