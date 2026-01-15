@@ -53,7 +53,8 @@ export class BoardArticleService {
                 await this.boardArticleStatsEditor({_id: articleId, targetKey: 'articleViews', modifier: 1});
                 targetBoardArticle.articleViews++;
             }
-            // meLikeed
+            // meLiked
+            // meFolowed
         }
 
         targetBoardArticle.memberData = await this.memberService.getMember(null, targetBoardArticle.memberId);
