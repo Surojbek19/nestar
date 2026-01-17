@@ -10,7 +10,7 @@ import { Message } from '../../libs/enums/common.enum';
 export class LikeService {
     constructor(@InjectModel('Like') private readonly likeModel: Model<Like>) {}
 
-    public async toggleLike(input: LikeInput): Promise<number> { //****** i changed "Like" to "number" *******//
+    public async toggleLike(input: LikeInput): Promise<number> {
         const search: T = {
              memberId: input.memberId, 
              likeRefId: input.likeRefId }, 
