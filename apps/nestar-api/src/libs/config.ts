@@ -70,6 +70,45 @@ export const lookupAuthMemberLiked = (memberId: T, targetRefId: string = '$_id')
 	}
 }
 
+
+interface LookupAuthMemberFollowed {
+	followerId: T;
+	followingId: string;
+}
+export const lookupAuthMemberFollowed = (input: LookupAuthMemberFollowed) => {
+	const { followerId, followingId } = input;
+	return {
+		$lookup:{
+			from: "follows",
+		let: {                      // this part helps conduct "search"
+			localFollowerId: followerId,
+			localFollowingId: followingId,
+			localMyFavorite: true
+		},
+		pipeline: [
+			{
+				$match: {
+					$expr: { //Treat this as a logical expression, not a normal field query.
+						$and: [{$eq: ["$followerId", "$$localFollowerId"]}, {$eq: ["$followingId", "$$localFollowingId"]}],
+					} // "$and" all conditions must be true, "$eq" it means.
+				}
+			},
+			{
+				$project: {   // this info that return in meLiked[]
+					_id: 0,        // Document itself id
+					followingId: 1,
+					followerId: 1,
+					myFollowing: '$$localMyFavorite',
+				}
+			}
+		], 
+		as: 'meFollowed', // "meLiked[]" at the end of each data
+	  }
+	}
+}
+
+
+
 export const lookupMember = {
 	$lookup:{
 		from: "members",
