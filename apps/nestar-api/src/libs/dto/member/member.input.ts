@@ -9,24 +9,24 @@ import { Direction } from "../../enums/common.enum";
 export class MemberInput {
     @IsNotEmpty()
     @Length(3, 12)
-    @Field(() => String) 
+    @Field(() => String)
     memberNick: string;
 
     @IsNotEmpty()
     @Length(5, 12)
-    @Field(() => String) 
+    @Field(() => String)
     memberPassword: string;
 
     @IsNotEmpty()
-    @Field(() => String) 
+    @Field(() => String)
     memberPhone: string;
 
     @IsOptional()
-    @Field(() => MemberType, {nullable: true})
+    @Field(() => MemberType, { nullable: true })
     memberType?: MemberType;
 
     @IsOptional()
-    @Field(() => MemberAuthType, {nullable: true})
+    @Field(() => MemberAuthType, { nullable: true })
     memberAuthType?: MemberAuthType;
 }
 
@@ -34,12 +34,12 @@ export class MemberInput {
 export class LoginInput {
     @IsNotEmpty()
     @Length(3, 12)
-    @Field(() => String) 
+    @Field(() => String)
     memberNick: string;
 
     @IsNotEmpty()
     @Length(5, 12)
-    @Field(() => String) 
+    @Field(() => String)
     memberPassword: string;
 }
 
@@ -48,7 +48,7 @@ export class LoginInput {
 @InputType()
 class AISearch {
     @IsOptional()
-    @Field(() => String, {nullable: true})
+    @Field(() => String, { nullable: true })
     text?: string;
 }
 
@@ -67,12 +67,12 @@ export class AgentsInquiry {
     limit: number;
 
     @IsOptional()
-    @IsIn([availableAgentSorts])
-    @Field(() => String, {nullable: true})
+    @IsIn(availableAgentSorts) /************************************************ */
+    @Field(() => String, { nullable: true })
     sort?: string;
 
     @IsOptional()
-    @Field(() => Direction, {nullable: true})
+    @Field(() => Direction, { nullable: true })
     direction?: Direction;
 
     @IsNotEmpty()
@@ -85,15 +85,15 @@ export class AgentsInquiry {
 @InputType()
 class MISearch {
     @IsOptional()
-    @Field(() => MemberStatus, {nullable:true})
+    @Field(() => MemberStatus, { nullable: true })
     memberStatus?: MemberStatus;
-    
+
     @IsOptional()
-    @Field(() => MemberType, {nullable: true})
+    @Field(() => MemberType, { nullable: true })
     memberType?: MemberType;
 
     @IsOptional()
-    @Field(() => String, {nullable: true})
+    @Field(() => String, { nullable: true })
     text?: string;
 }
 
@@ -112,11 +112,11 @@ export class MembersInquiry {
 
     @IsOptional()
     @IsIn([availableMemberSorts])
-    @Field(() => String, {nullable: true})
+    @Field(() => String, { nullable: true })
     sort?: string;
 
     @IsOptional()
-    @Field(() => Direction, {nullable: true})
+    @Field(() => Direction, { nullable: true })
     direction?: Direction;
 
     @IsNotEmpty()
