@@ -222,7 +222,7 @@ export class PropertyService {
         const sort: T = { [input?.sort ?? 'createdAt']: input?.direction ?? Direction.DESC };
 
         if (propertyStatus) match.propertyStatus = propertyStatus;
-        if (propertyLocationList) match.propertyLocation = { $n: propertyLocationList };
+        if (propertyLocationList) match.propertyLocation = propertyLocationList; // i removerd {$in: propertyLocationList}
 
         const result = await this.propertyModel
             .aggregate([
